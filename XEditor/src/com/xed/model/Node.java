@@ -3,11 +3,16 @@ package com.xed.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Node {
+public class Node {
 
-	List<Node> children = new ArrayList<Node>();
+	List<String> children = new ArrayList<String>();
+	String id = null;
 	String name = null;
 	String desc = null;
+
+	public String getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
@@ -17,6 +22,10 @@ public abstract class Node {
 		return desc;
 	}
 
+	protected void setId(String id) {
+		this.id = id;
+	}
+	
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
@@ -25,50 +34,45 @@ public abstract class Node {
 		this.name = name;
 	}
 
-	public abstract int getType();
+	public int getType() {
+		return 0;
+	};
 
-	public abstract boolean supportsChildType(int childType);
+	public boolean supportsChildType(int childType) {
+		return true;
+	};
 	
-	Node getChild(int index) {
+	String getChildId(int index) {
 		return children.get(index);
 	};
 
-	Node getChild(String name) {
-		
-		Node child = null;
-		
-		for (int k=0; k<children.size(); k++) {
-			if (children.get(k).getName().equals(name)) {
-				child = children.get(k);
-				break;
-			}
-		}
-		return child;
-	};
-	
-	void insertChild(Node child, int position) {
+	protected void insertChildId(String childId, int position) {
 		if (position<children.size()) {
-			children.add(position, child);
+			children.add(position, childId);
 		}
 	}
 
-	void addChild(Node child) {
-		children.add(child);
+	protected void addChildId(String childId) {
+		children.add(childId);
 	}
 
-	void replaceChild(Node child, int position) {
+	protected void replaceChildId(String childId, int position) {
 		if (position<children.size()) {
-			children.set(position, child);
+			children.set(position, childId);
 		}
 	}
 	
-	void removeChild(int position) {
+	protected void removeChildId(int position) {
 		if (position<children.size()) {
 			children.remove(position);
 		}
 	}
 	
-	int getChildrenSize() {
+	public int getChildrenSize() {
 		return children.size();
+	}
+	
+	public List getChildren() {
+		return children;
 	}
 }
