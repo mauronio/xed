@@ -46,28 +46,37 @@ public class Node {
 		return children.get(index);
 	};
 
-	protected void insertChildId(String childId, int position) {
+	protected void insertChild(String childId, int position) {
 		if (position<children.size()) {
 			children.add(position, childId);
 		}
 	}
 
-	protected void addChildId(String childId) {
+	protected void addChild(String childId) {
 		children.add(childId);
 	}
 
-	protected void replaceChildId(String childId, int position) {
+	protected void replaceChild(String childId, int position) {
 		if (position<children.size()) {
 			children.set(position, childId);
 		}
 	}
 	
-	protected void removeChildId(int position) {
+	protected void removeChild(int position) {
 		if (position<children.size()) {
 			children.remove(position);
 		}
 	}
-	
+
+	protected void removeChild(String childId) {
+		for (int k=0; k<children.size(); k++) {
+			if (children.get(k).equals(childId)) {
+				removeChild(k);
+				break;
+			}
+		}
+	}
+
 	public int getChildrenSize() {
 		return children.size();
 	}
